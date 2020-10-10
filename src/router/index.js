@@ -1,0 +1,204 @@
+import Vue from 'vue';
+import Router from 'vue-router';
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+    return routerPush.call(this, location).catch(error=> error)
+}
+Vue.use(Router);
+
+export default new Router({
+    routes: [
+        {
+            path: '/',
+            redirect: '/dashboard'
+        },
+        {
+            path: '/',
+            component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
+            meta: { title: '自述文件' },
+            children: [
+                {
+                    path: '/ModuleManagement',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/ModuleManagement.vue'),
+                    meta: { title: '模块管理' }
+                },
+                {
+                    path: '/templatemanagement',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/TemplateManagement.vue'),
+                    meta: { title: '模板管理' }
+                },
+                {
+                    path: '/performancetable',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/PerformanceEvaluation.vue'),
+                    meta: { title: '绩效评价指标管理' }
+                },
+                {
+                    path: '/unitproject',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/UnitProject.vue'),
+                    meta: { title: '单位项目列表' }
+                },
+                {
+                    path: '/weekform',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/WeekForm.vue'),
+                    meta: { title: '周报' }
+                },
+                {
+                    path: '/monthform',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/MonthForm.vue'),
+                    meta: { title: '月报' }
+                },
+                {
+                    path: '/PermissionManager',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/PermissionManager.vue'),
+                    meta: { title: '权限管理' }
+                },
+                {
+                    path: '/CharacterManagement',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/CharacterManagement.vue'),
+                    meta: { title: '角色管理' }
+                },{
+                    path: '/CompanyManagement',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/CompanyManagement.vue'),
+                    meta: { title: '单位管理' }
+                },{
+                    path: '/UserManagement',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/UserManagement.vue'),
+                    meta: { title: '用户管理' }
+                },{
+                    path: '/ProjectReviewList',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/ProjectReviewList.vue'),
+                    meta: { title: '项目审核列表' }
+                },{
+                    path: '/projectDetails',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/projectDetails.vue'),
+                    meta: { title: '项目详情' }
+                },{
+                    path: '/Review',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/Review.vue'),
+                    meta: { title: '审核' }
+                },{
+                    path: '/projectDetails2',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/projectDetails2.vue'),
+                    meta: { title: '项目详情' }
+                },{
+                    path: '/projectDetails_user',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/projectDetails_user.vue'),
+                    meta: { title: '项目详情' }
+                },{
+                    path: '/Review2',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/Review2.vue'),
+                    meta: { title: '送审' }
+                },{
+                    path: '/PerformanceReview',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/PerformanceReview.vue'),
+                    meta: { title: '绩效评审' }
+                },{
+                    path: '/read-onlyPerformance',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/read-onlyPerformance.vue'),
+                    meta: { title: '绩效评审详情'}
+                },
+				{
+					path: '/AddSeal',
+					component: () => import(/* webpackChunkName: "donate" */ '../components/page/AddSeal.vue'),
+					meta: { title: '盖章' }
+				},
+                ////////////////////////////////原框架内容/////////////////////////////////////////
+                {
+                    path: '/dashboard',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
+                    meta: { title: '系统首页' }
+                },
+                {
+                    path: '/icon',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
+                    meta: { title: '自定义图标' }
+                },
+                {
+                    path: '/table',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/BaseTable.vue'),
+                    meta: { title: '基础表格' }
+                },
+                {
+                    path: '/tabs',
+                    component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
+                    meta: { title: 'tab选项卡' }
+                },
+                {
+                    path: '/form',
+                    component: () => import(/* webpackChunkName: "form" */ '../components/page/BaseForm.vue'),
+                    meta: { title: '基本表单' }
+                },
+                {
+                    // 富文本编辑器组件
+                    path: '/editor',
+                    component: () => import(/* webpackChunkName: "editor" */ '../components/page/VueEditor.vue'),
+                    meta: { title: '富文本编辑器' }
+                },
+                {
+                    // markdown组件
+                    path: '/markdown',
+                    component: () => import(/* webpackChunkName: "markdown" */ '../components/page/Markdown.vue'),
+                    meta: { title: 'markdown编辑器' }
+                },
+                {
+                    // 图片上传组件
+                    path: '/upload',
+                    component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
+                    meta: { title: '文件上传' }
+                },
+                {
+                    // vue-schart组件
+                    path: '/charts',
+                    component: () => import(/* webpackChunkName: "chart" */ '../components/page/BaseCharts.vue'),
+                    meta: { title: 'schart图表' }
+                },
+                {
+                    // 拖拽列表组件
+                    path: '/drag',
+                    component: () => import(/* webpackChunkName: "drag" */ '../components/page/DragList.vue'),
+                    meta: { title: '拖拽列表' }
+                },
+                {
+                    // 拖拽Dialog组件
+                    path: '/dialog',
+                    component: () => import(/* webpackChunkName: "dragdialog" */ '../components/page/DragDialog.vue'),
+                    meta: { title: '拖拽弹框' }
+                },
+                {
+                    // 国际化组件
+                    path: '/i18n',
+                    component: () => import(/* webpackChunkName: "i18n" */ '../components/page/I18n.vue'),
+                    meta: { title: '国际化' }
+                },
+                {
+                    path: '/404',
+                    component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
+                    meta: { title: '404' }
+                },
+                {
+                    path: '/403',
+                    component: () => import(/* webpackChunkName: "403" */ '../components/page/403.vue'),
+                    meta: { title: '403' }
+                },
+                {
+                    path: '/donate',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/Donate.vue'),
+                    meta: { title: '支持作者' }
+                },
+                {
+                    path: '/test',
+                    component: () => import(/* webpackChunkName: "donate" */ '../components/page/test.vue'),
+                    meta: { title: '测试' }
+                }
+            ]
+        },
+        {
+            path: '/login',
+            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue')
+        },
+        {
+            path: '*',
+            redirect: '/404'
+        }
+    ]
+});
